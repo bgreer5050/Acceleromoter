@@ -7,6 +7,7 @@
             <Label x:Name="ReadingsText"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Play" HorizontalOptions="Center" BackgroundColor="Black" TextColor="White" Clicked="Button_Clicked"></Button>
             <Switch x:Name="MonitorSwitch" IsToggled="True" Toggled="MonitorSwitch_Toggled"></Switch>
         </StackLayout>
     </ContentPage.Content>

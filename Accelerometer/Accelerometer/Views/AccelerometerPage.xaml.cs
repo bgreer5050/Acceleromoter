@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Plugin.SimpleAudioPlayer;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace Accelerometer.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccelerometerPage : ContentPage
     {
+        private ISimpleAudioPlayer _simpleAudioPlayer;
         SensorSpeed speed = SensorSpeed.UI;
         float xDiff = 0;
         float zDiff = 0;
@@ -20,6 +23,9 @@ namespace Accelerometer.Views
         public AccelerometerPage()
         {
             InitializeComponent();
+            _simpleAudioPlayer = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
+            Stream beepStream = GetType().Assembly.GetManifestResourceStream("Accelerometer.beep.mp3");
+            bool isSuccess = _simpleAudioPlayer.Load(beepStream);
             Xamarin.Essentials.Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
             Xamarin.Essentials.Accelerometer.Start(speed);
 
@@ -47,6 +53,11 @@ namespace Accelerometer.Views
                 Xamarin.Essentials.Accelerometer.Stop();
             else
                 Xamarin.Essentials.Accelerometer.Start(speed);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            _simpleAudioPlayer.Play();
         }
     }
 }
