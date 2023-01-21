@@ -41,7 +41,7 @@ namespace Accelerometer.Views
 
             var data = e.Reading;
 
-            if ((xDiff - data.Acceleration.X) > .007 || (zDiff - data.Acceleration.Z) > .007 || (yDiff - data.Acceleration.Y) > .007)
+            if ((xDiff - data.Acceleration.X) > .003 || (zDiff - data.Acceleration.Z) > .003 || (yDiff - data.Acceleration.Y) > .003)
             {
 
                 if (!IsBusy)
@@ -53,6 +53,7 @@ namespace Accelerometer.Views
                         ReadingsText.Text = $"Reading: X: {data.Acceleration.X}, Y: {data.Acceleration.Y}, Z: {data.Acceleration.Z}";
                     }
                     //System.Threading.Thread.Sleep(2000);
+                    _simpleAudioPlayer.Play();
                     IsBusy = false;
                 });
                     xDiff = data.Acceleration.X;
